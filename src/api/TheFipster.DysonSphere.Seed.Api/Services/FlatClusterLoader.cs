@@ -21,7 +21,30 @@ namespace TheFipster.DysonSphere.Seed.Api.Services
         public async Task<IEnumerable<object[]>> GetSeeds()
         {
             List<object[]> rows = new List<object[]>();
-            var cmd = new NpgsqlCommand("SELECT * FROM seeds LIMIT 500", connection);
+            var cmd = new NpgsqlCommand(@"SELECT 
+                ""Seed"",
+                ""OTypeCount"",
+                ""GiantCount"",
+                ""DwarfCount"",
+                ""NeutronStarCount"",
+                ""BlackHoleCount"",
+                ""IceGiantCount"",
+                ""GasGiantCount"",
+                ""RockyPlanetCount"",
+                ""MaxLuminosity"",
+                ""MaxRadius"",
+                ""AvgResourceCoeficient"",
+                ""MaxResourceCoeficient"",
+                ""UnipolarCoeficient"",
+                ""MaxStarEnergy"",
+                ""TotalEnergy"",
+                ""AverageDistance"",
+                ""StarsWithin10Ly"",
+                ""StarsWithin20Ly"",
+                ""BirthMoonCount"",
+                ""IsBirthGiantIce""
+                FROM seeds LIMIT 500", 
+                connection);
             using (var reader = await cmd.ExecuteReaderAsync())
             {
                 var names = new string[reader.FieldCount];

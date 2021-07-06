@@ -11,6 +11,8 @@ namespace TheFipster.DysonSphere.Seed.Api
 {
     public class Startup
     {
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -20,10 +22,20 @@ namespace TheFipster.DysonSphere.Seed.Api
 
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddCors(options =>
+            {
+                options.AddPolicy(name: MyAllowSpecificOrigins,
+                                  builder =>
+                                  {
+                                      builder.WithOrigins("http://localhost:4200");
+                                  });
+            });
+
             services.AddControllers();
+            services.AddRouting(options => options.LowercaseUrls = true);
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "TheFipster.DysonSphere.Seed.Api", Version = "v1" });
+                c.SwaggerDoc("v1", new OpenApiInfo { Title = "Seed.Api", Version = "v1" });
             });
 
             services.AddScoped<IFlatClusterLoader, FlatClusterLoader>();
@@ -35,9 +47,10 @@ namespace TheFipster.DysonSphere.Seed.Api
             {
                 app.UseDeveloperExceptionPage();
                 app.UseSwagger();
-                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "TheFipster.DysonSphere.Seed.Api v1"));
+                app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "Seed.Api v1"));
             }
 
+            app.UseCors(MyAllowSpecificOrigins);
             app.UseHttpsRedirection();
             app.UseRouting();
             app.UseAuthorization();

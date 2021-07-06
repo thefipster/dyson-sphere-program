@@ -14,6 +14,7 @@ namespace TheFipster.DysonSphere.Seed.Api.Controllers
         public SeedsController(IFlatClusterLoader clusterLoader)
             => loader = clusterLoader;
 
+        [HttpGet]
         public async Task<IEnumerable<object[]>> Index()
            => await loader.GetSeeds();
     }

@@ -9,6 +9,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheFipster.DysonSphere.Seed
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TheFipster.DysonSphere.Tools.Cli", "tools\TheFipster.DysonSphere.Tools.Cli\TheFipster.DysonSphere.Tools.Cli.csproj", "{9D60971A-F695-4B8E-A6BC-A750C26E880E}"
 EndProject
+Project("{E53339B2-1760-4266-BCC7-CA923CBCF16C}") = "docker-compose", "docker-compose.dcproj", "{EC56B3CF-D06E-48A6-872D-A75BB2E05D40}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{9D60971A-F695-4B8E-A6BC-A750C26E880E}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D60971A-F695-4B8E-A6BC-A750C26E880E}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D60971A-F695-4B8E-A6BC-A750C26E880E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EC56B3CF-D06E-48A6-872D-A75BB2E05D40}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EC56B3CF-D06E-48A6-872D-A75BB2E05D40}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EC56B3CF-D06E-48A6-872D-A75BB2E05D40}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EC56B3CF-D06E-48A6-872D-A75BB2E05D40}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
