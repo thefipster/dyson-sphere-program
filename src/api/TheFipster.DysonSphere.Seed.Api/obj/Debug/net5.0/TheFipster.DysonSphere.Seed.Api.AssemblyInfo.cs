@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("6960fa1e-b75a-4a6c-8d8f-52e85c99fbb6")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("TheFipster.DysonSphere.Seed.Api")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]

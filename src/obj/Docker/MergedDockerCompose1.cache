@@ -1,0 +1,16 @@
+services:
+  thefipster.dysonsphere.seed.api:
+    build:
+      context: C:\Users\felix\github\dyson-sphere-program\src
+      dockerfile: api/TheFipster.DysonSphere.Seed.Api/Dockerfile
+    environment:
+      ASPNETCORE_ENVIRONMENT: Development
+      ASPNETCORE_URLS: https://+:443;http://+:80
+    image: thefipsterdysonsphereseedapi
+    ports:
+    - target: 80
+    - target: 443
+    volumes:
+    - C:\Users\felix\AppData\Roaming\ASP.NET\Https:/root/.aspnet/https:ro
+    - C:\Users\felix\AppData\Roaming\Microsoft\UserSecrets:/root/.microsoft/usersecrets:ro
+version: '3.4'
