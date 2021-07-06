@@ -1,0 +1,8 @@
+{
+  "profiles": {
+    "TheFipster.DysonSphere.Tools.Cli": {
+      "commandName": "Project",
+      "commandLineArgs": "import -i \"E:\\dyson sphere\\seedhunt\\bundled\""
+    }
+  }
+}
