@@ -38,5 +38,3 @@ jobs:
     - run: npm run build --if-present
       working-directory: src/spa
       
-    - run: npm test
-      working-directory: src/spa
