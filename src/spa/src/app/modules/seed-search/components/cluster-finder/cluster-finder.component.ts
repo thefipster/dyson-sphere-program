@@ -1,5 +1,7 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatSort, Sort } from '@angular/material/sort';
+import { MatSidenav } from '@angular/material/sidenav';
+import { ProgressService } from 'src/app/services/progress/progress.service';
+import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 import { SeedModel } from '../../interfaces/seed-model';
 import { SeedSearchModel } from '../../interfaces/seed-search-model';
 import { ApiService } from '../../services/api.service';
@@ -33,17 +35,28 @@ export class ClusterFinderComponent implements OnInit {
     'isBirthGiantIce'
   ];
 
-  constructor(private apiService: ApiService) { }
+  @ViewChild('sidenav') public sidenav: MatSidenav;
+
+  constructor(private apiService: ApiService, private sidenavService: SidenavService, private progressService: ProgressService) { }
 
   ngOnInit(): void {
     this.apiService.getSeeds().subscribe((data: SeedModel[]) => {
       this.seeds = data;
-      this.isSearching = false;
+      this.progressService.turnOff();
     });
   }
 
+  ngAfterViewInit(): void {
+    this.sidenavService.setSidenav(this.sidenav);
+  }
+
+  ngOnDestroy(): void {
+    this.sidenavService.reset();
+    this.progressService.turnOff();
+  }
+
   sortData(sort: any) {
-    this.isSearching = true;
+      this.progressService.turnOn();
 
      const search = { 
        sortDirection: sort.direction,
@@ -52,7 +65,7 @@ export class ClusterFinderComponent implements OnInit {
 
      this.apiService.searchSeeds(search).subscribe((data: SeedModel[]) => {
        this.seeds = data;
-       this.isSearching = false;
+      this.progressService.turnOff();
      })
   }
 }
