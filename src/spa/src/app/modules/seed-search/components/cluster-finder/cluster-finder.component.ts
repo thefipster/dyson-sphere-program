@@ -4,7 +4,8 @@ import { ProgressService } from 'src/app/services/progress/progress.service';
 import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 import { SeedModel } from '../../interfaces/seed-model';
 import { SeedSearchModel } from '../../interfaces/seed-search-model';
-import { ApiService } from '../../services/api.service';
+import { ApiService } from '../../services/api/api.service';
+import { FilterService } from '../../services/filter/filter.service';
 
 @Component({
   selector: 'app-cluster-finder',
@@ -37,17 +38,22 @@ export class ClusterFinderComponent implements OnInit {
 
   @ViewChild('sidenav') public sidenav: MatSidenav;
 
-  constructor(private apiService: ApiService, private sidenavService: SidenavService, private progressService: ProgressService) { }
+  constructor(
+    private apiService: ApiService,
+    private sidenavService: SidenavService,
+    private progressService: ProgressService,
+    private filterService: FilterService
+  ) { }
 
   ngOnInit(): void {
-    this.apiService.getSeeds().subscribe((data: SeedModel[]) => {
+    this.apiService.searchSeeds().subscribe((data: SeedModel[]) => {
       this.seeds = data;
       this.progressService.turnOff();
     });
   }
 
   ngAfterViewInit(): void {
-    this.sidenavService.setSidenav(this.sidenav);
+    this.sidenavService.setSidenavWithIcon(this.sidenav, 'filter_alt');
   }
 
   ngOnDestroy(): void {
@@ -56,16 +62,19 @@ export class ClusterFinderComponent implements OnInit {
   }
 
   sortData(sort: any) {
-      this.progressService.turnOn();
-
-     const search = { 
-       sortDirection: sort.direction,
-       sortColumn: sort.active
-     } as SeedSearchModel;
-
-     this.apiService.searchSeeds(search).subscribe((data: SeedModel[]) => {
-       this.seeds = data;
+    this.progressService.turnOn();
+    this.filterService.setSearch(sort.active, sort.direction);
+    this.apiService.searchSeeds().subscribe((data: SeedModel[]) => {
+      this.seeds = data;
       this.progressService.turnOff();
-     })
+    })
+  }
+
+  filtersApplied() {
+    this.progressService.turnOn();
+    this.apiService.searchSeeds().subscribe((data: SeedModel[]) => {
+      this.seeds = data;
+      this.progressService.turnOff();
+    })
   }
 }

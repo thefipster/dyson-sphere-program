@@ -1,6 +1,7 @@
 <mat-toolbar>
-  <button *ngIf="sidenavService.isReady(); else buttonSpacer" mat-icon-button (click)="sidenavService.toggle()">
-    <mat-icon>menu</mat-icon>
+  <button *ngIf="sidenavService.isReady; else buttonSpacer" mat-button (click)="sidenavService.toggle()">
+    <mat-icon>{{ sidenavService.icon }}</mat-icon>
+    Filter
   </button>
   <ng-template #buttonSpacer>
     <div class="icon-button-spacer"></div>
@@ -9,20 +10,22 @@
   <span class="spacer"></span>
 
   <button mat-button routerLink="/">
-      <mat-icon class="main-logo">insights</mat-icon>
-      <span class="mat-headline">
+    <mat-icon>insights</mat-icon>
+    <span class="mat-headline">
       Dyson Sphere Program Seedbank
     </span>
   </button>
 
-  <button mat-icon-button  routerLink="/search">
+  <button mat-button routerLink="/search">
     <mat-icon>search</mat-icon>
+    Search
   </button>
 
   <span class="spacer"></span>
 
 </mat-toolbar>
-<mat-progress-bar *ngIf="progressService.isRunning; else progressSpacer" #progressBar mode="indeterminate"></mat-progress-bar>
+<mat-progress-bar *ngIf="progressService.isRunning; else progressSpacer" #progressBar mode="indeterminate">
+</mat-progress-bar>
 <ng-template #progressSpacer>
   <div class="progress-bar-spacer"></div>
 </ng-template>

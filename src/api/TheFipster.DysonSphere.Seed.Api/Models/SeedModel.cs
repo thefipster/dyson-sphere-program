@@ -2,6 +2,8 @@
 {
     public class SeedModel
     {
+        public const string Table = "seeds";
+
         public int Seed { get; set; }
         public int OTypeCount { get; set; }
         public int GiantCount { get; set; }

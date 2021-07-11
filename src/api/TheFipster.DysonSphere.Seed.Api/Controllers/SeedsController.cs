@@ -16,15 +16,17 @@ namespace TheFipster.DysonSphere.Seed.Api.Controllers
         public SeedsController(IFlatClusterLoader clusterLoader)
             => loader = clusterLoader;
 
-        [HttpGet]
-        public async Task<IEnumerable<SeedModel>> Index()
-           => await loader.GetSeeds();
-
         [HttpPost]
         public async Task<IEnumerable<SeedModel>> Search([FromBody]SeedSearchModel searchModel)
         {
-            searchModel.SortColumn = char.ToUpper(searchModel.SortColumn.First()) + searchModel.SortColumn.Substring(1);
+            searchModel.SortColumn = capitalize(searchModel.SortColumn);
+            for (int i = 0; i < searchModel.Filters.Count(); i++)
+                searchModel.Filters[i].Column = capitalize(searchModel.Filters[i].Column);
+
             return await loader.GetSeeds(searchModel);
         }
+
+        private string capitalize(string text)
+            => char.ToUpper(text.First()) + text.Substring(1);
     }
 }
