@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
+import { MatProgressBar } from '@angular/material/progress-bar';
+import { ProgressService } from 'src/app/services/progress/progress.service';
+import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 
 @Component({
   selector: 'app-toolbar',
   templateUrl: './toolbar.component.html',
   styleUrls: ['./toolbar.component.scss']
 })
-export class ToolbarComponent implements OnInit {
+export class ToolbarComponent {
+  @ViewChild('progressBar') public sidenav: MatProgressBar;
 
-  constructor() { }
-
-  ngOnInit(): void {
-  }
-
+  constructor(public sidenavService: SidenavService, public progressService: ProgressService) { }
 }

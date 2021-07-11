@@ -13,6 +13,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { LandingPageComponent } from './components/landing-page/landing-page.component';
 import { ToolbarComponent } from './components/toolbar/toolbar.component';
 
+import { ProgressService } from './services/progress/progress.service';
+import { SidenavService } from './services/sidenav/sidenav.service';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -25,9 +29,14 @@ import { ToolbarComponent } from './components/toolbar/toolbar.component';
     SeedSearchModule,
     SeedViewModule,
     BrowserAnimationsModule,
-    MaterialModule
+    MaterialModule,
   ],
-  providers: [],
-  bootstrap: [AppComponent]
+  providers: [
+    SidenavService, 
+    ProgressService
+  ],
+  bootstrap: [
+    AppComponent
+  ]
 })
 export class AppModule { }

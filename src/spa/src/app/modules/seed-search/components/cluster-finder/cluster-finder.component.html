@@ -1,148 +1,144 @@
+<mat-sidenav-container>
+    <mat-sidenav #sidenav>
+        <app-filter></app-filter>
+    </mat-sidenav>
 
+    <mat-sidenav-content>
+        <table mat-table matSort matSortDisableClear *ngIf="seeds.length > 0" class="seed-search-table"
+            [dataSource]="seeds" (matSortChange)="sortData($event)">
 
-<mat-progress-bar *ngIf="isSearching; else progressSpacer" mode="indeterminate"></mat-progress-bar>
-<ng-template #progressSpacer>
-    <div class="progress-spacer"></div>
-</ng-template>
+            <ng-container matColumnDef="seed" [sticky]="true">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Seed
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.seed | seed}} </td>
+            </ng-container>
 
-<table 
-    mat-table
-    matSort
-    matSortDisableClear
-    *ngIf="seeds.length > 0" 
-    class="seed-search-table"
-    [dataSource]="seeds" 
-    (matSortChange)="sortData($event)" >
+            <ng-container matColumnDef="oTypeCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Info about the action"> O Stars </th>
+                <td mat-cell *matCellDef="let row"> {{row.oTypeCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="seed" [sticky]="true">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Seed
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.seed | seed}} </td>
-    </ng-container>
+            <ng-container matColumnDef="giantCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Giants </th>
+                <td mat-cell *matCellDef="let row"> {{row.giantCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="oTypeCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header matTooltip="Info about the action"> O Stars </th>
-        <td mat-cell *matCellDef="let row"> {{row.oTypeCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="dwarfCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> White Dwarfs </th>
+                <td mat-cell *matCellDef="let row"> {{row.dwarfCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="giantCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Giant Stars </th>
-        <td mat-cell *matCellDef="let row"> {{row.giantCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="neutronStarCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Neutron Stars </th>
+                <td mat-cell *matCellDef="let row"> {{row.neutronStarCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="dwarfCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> White Dwarfs </th>
-        <td mat-cell *matCellDef="let row"> {{row.dwarfCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="blackHoleCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Black Holes </th>
+                <td mat-cell *matCellDef="let row"> {{row.blackHoleCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="neutronStarCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Neutron Stars </th>
-        <td mat-cell *matCellDef="let row"> {{row.neutronStarCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="gasGiantCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Gas Giants </th>
+                <td mat-cell *matCellDef="let row"> {{row.gasGiantCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="blackHoleCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Black Holes </th>
-        <td mat-cell *matCellDef="let row"> {{row.blackHoleCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="iceGiantCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Ice Giants </th>
+                <td mat-cell *matCellDef="let row"> {{row.iceGiantCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="gasGiantCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Gas Giants </th>
-        <td mat-cell *matCellDef="let row"> {{row.gasGiantCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="maxLuminosity">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Luminosity </th>
+                <td mat-cell *matCellDef="let row"> {{row.maxLuminosity | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="iceGiantCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Ice Giants </th>
-        <td mat-cell *matCellDef="let row"> {{row.iceGiantCount}} </td>
-    </ng-container>
+            <ng-container matColumnDef="maxRadius">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header> Radius </th>
+                <td mat-cell *matCellDef="let row"> {{row.maxRadius | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="maxLuminosity">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Max Luminosity </th>
-        <td mat-cell *matCellDef="let row"> {{row.maxLuminosity | number:'1.2-2'}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="maxRadius">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header> Max Radius </th>
-        <td mat-cell *matCellDef="let row"> {{row.maxRadius | number:'1.2-2'}} </td>
-    </ng-container>
-
-    <ng-container matColumnDef="avgResourceCoeficient">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Resources
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="avgResourceCoeficient">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Resources
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                     This is an arbitrary number outlining the general resource availability averaged over the whole cluster.
                     This is also not the only variable the seed algorithm uses, it is basically a coeficient that is applied
                     to the random roll of the algorithm. 
                 ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.avgResourceCoeficient | number:'1.2-2'}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.avgResourceCoeficient | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="unipolarCoeficient">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Unipolar Magnets
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="unipolarCoeficient">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Magnets
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                 This is basically the same as the resource number from the previous column. The difference of this number is that
                 it only applies to neutron stars and black holes.
             ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.unipolarCoeficient | number:'1.2-2'}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.unipolarCoeficient | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="maxStarEnergy">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Star Energy
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="maxStarEnergy">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Star Energy
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                 This is an arbitrary number of the maximum dyson sphere energy that can be extracted from a single star of this cluster. 
                 It is calculated by the product of the surface area of the dyson sphere and the luminosity of the star. If you want to build
                 the single most powerfull dyson sphere, sort by this number.
             ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.maxStarEnergy | number:'1.2-2'}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.maxStarEnergy | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="totalEnergy">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Cluster Energy
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="totalEnergy">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Cluster Energy
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                 This is an arbitrary number of the maximum dyson sphere energy that can be extracted from the whole cluster. 
                 It is calculated by the product of the surface area of the dyson sphere and the luminosity of the star summed up over all stars of the cluster. 
                 This means this is the total energy that can be extracted by constructing a dyson sphere around every star of the cluster.
             ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.totalEnergy | number:'1.2-2'}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.totalEnergy | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="averageDistance">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Cluster Size
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="averageDistance">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Dimensions
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                 This is the average distance of every star to the cluster center which is the solar system where the player begins.
             ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.averageDistance | number:'1.2-2'}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.averageDistance | number:'1.2-2'}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="birthMoonCount">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Birth Moons
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="birthMoonCount">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Birth Moons
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                 This is the number of moons that orbit the gas or ice giant of the starting solar system.
             ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.birthMoonCount}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.birthMoonCount}} </td>
+            </ng-container>
 
-    <ng-container matColumnDef="isBirthGiantIce">
-        <th mat-header-cell *matHeaderCellDef mat-sort-header>
-            Birth Giant
-            <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
+            <ng-container matColumnDef="isBirthGiantIce">
+                <th mat-header-cell *matHeaderCellDef mat-sort-header>
+                    Birth Giant
+                    <mat-icon [matTooltipClass]="'tooltip'" matTooltip="
                 This indicates whether the giant in the starting solar system is a gas or an ice giant.
             ">help_outline</mat-icon>
-        </th>
-        <td mat-cell *matCellDef="let row"> {{row.isBirthGiantIce | gasGiantType}} </td>
-    </ng-container>
+                </th>
+                <td mat-cell *matCellDef="let row"> {{row.isBirthGiantIce | gasGiantType}} </td>
+            </ng-container>
 
-    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
-    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-</table>
+            <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+
+    </mat-sidenav-content>
+</mat-sidenav-container>

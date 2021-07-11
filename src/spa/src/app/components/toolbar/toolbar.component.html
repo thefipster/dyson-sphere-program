@@ -1,4 +1,11 @@
 <mat-toolbar>
+  <button *ngIf="sidenavService.isReady(); else buttonSpacer" mat-icon-button (click)="sidenavService.toggle()">
+    <mat-icon>menu</mat-icon>
+  </button>
+  <ng-template #buttonSpacer>
+    <div class="icon-button-spacer"></div>
+  </ng-template>
+
   <span class="spacer"></span>
 
   <button mat-button routerLink="/">
@@ -15,3 +22,7 @@
   <span class="spacer"></span>
 
 </mat-toolbar>
+<mat-progress-bar *ngIf="progressService.isRunning; else progressSpacer" #progressBar mode="indeterminate"></mat-progress-bar>
+<ng-template #progressSpacer>
+  <div class="progress-bar-spacer"></div>
+</ng-template>
