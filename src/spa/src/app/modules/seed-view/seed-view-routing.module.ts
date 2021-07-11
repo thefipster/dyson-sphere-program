@@ -1,8 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ClusterInfoComponent } from './cluster-info/cluster-info.component';
 
-
+import { ClusterInfoComponent } from './components/cluster-info/cluster-info.component';
 
 const routes: Routes = [
   {

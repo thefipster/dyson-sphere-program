@@ -1,0 +1,42 @@
+table {
+    width: 100%;
+}
+
+.mat-sort-header {
+    border-right: 1px solid currentColor;
+    padding-left: 10px;
+    padding-right: 10px;
+    font-weight: 600;
+    font-size: 16px;
+    color: #333;
+}
+
+.mat-cell {
+    border-right: 1px solid currentColor;
+    padding-right: 10px;
+    font-size: 16px;
+    font-family: "Consolas", monospace;
+    text-align: right;
+  }
+
+.mat-column-seed {
+    text-align: center;
+    font-weight: 600;
+    color: #333;
+}
+
+.mat-column-isBirthGiantIce {
+    padding-left: 10px;
+    text-align: left;
+    border-right: none;
+}
+
+mat-icon {
+    margin-left: 5px;
+}
+
+.progress-spacer {
+    height: 4px;
+    background-color: #f5f5f5;
+}
+
