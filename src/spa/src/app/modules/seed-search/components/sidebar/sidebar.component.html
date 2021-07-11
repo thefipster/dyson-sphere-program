@@ -1,0 +1,31 @@
+<div class="filter-sidebar" flexLayout="column" flexLayoutGap="20px">
+    <div class="action-box">
+        <span class="mat-title">Filters</span>
+        <span class="spacer"></span>
+        <span>
+            <button mat-icon-button color="warn" (click)="sidenavService.close()">
+                <mat-icon>close</mat-icon>
+            </button>
+            <button mat-icon-button color="primary" (click)="submit()">
+                <mat-icon>check</mat-icon>
+            </button>
+        </span>
+    </div>
+    <div class="filter-box">
+        <app-filter [label]="'O Stars'" [column]="'oTypeCount'" [min]="1" [max]="10"></app-filter>
+        <app-filter [label]="'Giants'" [column]="'giantCount'" [min]="0" [max]="3"></app-filter>
+        <app-filter [label]="'White Dwarfs'" [column]="'dwarfCount'" [min]="2" [max]="3"></app-filter>
+        <app-filter [label]="'Neutron Stars'" [column]="'neutronStarCount'" [min]="0" [max]="2"></app-filter>
+        <app-filter [label]="'Black Holes'" [column]="'blackHoleCount'" [min]="1" [max]="2"></app-filter>
+        <app-filter [label]="'Gas Giants'" [column]="'gasGiantCount'" [min]="10" [max]="50"></app-filter>
+        <app-filter [label]="'Ice Giants'" [column]="'iceGiantCount'" [min]="16" [max]="49"></app-filter>
+        <app-filter [label]="'Luminosity'" [column]="'maxLuminosity'" [min]="2.4" [max]="2.8" [step]="0.01"></app-filter>
+        <app-filter [label]="'Radius'" [column]="'maxRadius'" [min]="0" [max]="3"></app-filter>
+        <app-filter [label]="'Resources'" [column]="'avgResourceCoeficient'" [min]="1" [max]="5" [step]="0.1"></app-filter>
+        <app-filter [label]="'Magnets'" [column]="'unipolarCoeficient'" [min]="1" [max]="17" [step]="0.1"></app-filter>
+        <app-filter [label]="'Star Energy'" [column]="'maxStarEnergy'" [min]="25" [max]="310"></app-filter>
+        <app-filter [label]="'Cluster Energy'" [column]="'totalEnergy'" [min]="255" [max]="1170"></app-filter>
+        <app-filter [label]="'Dimensions'" [column]="'averageDistance'" [min]="8" [max]="32" [step]="0.1"></app-filter>
+        <app-filter [label]="'Birth Moons'" [column]="'birthMoonCount'" [min]="1" [max]="3"></app-filter>
+    </div>
+</div>

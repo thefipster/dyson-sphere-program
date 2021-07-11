@@ -9,6 +9,8 @@ import { MatTableModule } from '@angular/material/table'
 import { MatSortModule } from '@angular/material/sort';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
 
 
 
@@ -24,7 +26,9 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatProgressBarModule,
     MatSortModule,
     MatTooltipModule,
-    MatSidenavModule
+    MatSidenavModule,
+    MatDividerModule,
+    MatCardModule
   ]
 })
 export class MaterialModule { }

@@ -4,20 +4,25 @@ import { MatSidenav } from '@angular/material/sidenav';
 @Injectable()
 export class SidenavService {
     private sidenav: MatSidenav;
-    private ready: boolean = false;
+
+    public isReady: boolean = false;
+    public icon: string = 'menu';
 
 
     public setSidenav(sidenav: MatSidenav) {
         this.sidenav = sidenav;
-        this.ready = true;
+        this.isReady = true;
+    }
+
+    public setSidenavWithIcon(sidenav: MatSidenav, icon: string) {
+        this.sidenav = sidenav;
+        this.isReady = true;
+        this.icon = icon;
     }
 
     public reset() {
-        this.ready = false;
-    }
-
-    public isReady(): boolean {
-        return this.ready;
+        this.isReady = false;
+        this.icon = 'menu';
     }
 
     public open() {

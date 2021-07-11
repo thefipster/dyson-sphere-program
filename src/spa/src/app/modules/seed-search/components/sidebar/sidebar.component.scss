@@ -1,0 +1,19 @@
+.filter-sidebar {
+    width: 300px;
+    overflow-y: hidden;
+}
+
+.filter-box {
+    height: calc(100vh - 128px);
+    overflow-y: auto;
+}
+
+.action-box {
+    padding: 10px 20px 0 20px;
+    text-align: right;
+    display: flex;
+}
+
+.action-box button {
+    margin-left: 20px;
+}
