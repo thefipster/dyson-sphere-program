@@ -27,7 +27,7 @@ namespace TheFipster.DysonSphere.Seed.Api
                 options.AddPolicy(name: MyAllowSpecificOrigins,
                                   builder =>
                                   {
-                                      builder.WithOrigins("http://localhost:4200");
+                                      builder.WithOrigins("http://localhost:4200").AllowAnyMethod().AllowAnyHeader();
                                   });
             });
 
