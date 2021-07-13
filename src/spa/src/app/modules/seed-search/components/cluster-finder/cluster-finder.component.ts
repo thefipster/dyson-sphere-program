@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { MatSidenav } from '@angular/material/sidenav';
+import { MatSnackBar } from '@angular/material/snack-bar';
 import { ProgressService } from 'src/app/services/progress/progress.service';
 import { SidenavService } from 'src/app/services/sidenav/sidenav.service';
 import { SeedModel } from '../../interfaces/seed-model';
@@ -42,14 +43,12 @@ export class ClusterFinderComponent implements OnInit {
     private apiService: ApiService,
     private sidenavService: SidenavService,
     private progressService: ProgressService,
-    private filterService: FilterService
+    private filterService: FilterService,
+    private snackBar: MatSnackBar
   ) { }
 
   ngOnInit(): void {
-    this.apiService.searchSeeds().subscribe((data: SeedModel[]) => {
-      this.seeds = data;
-      this.progressService.turnOff();
-    });
+    this.getData();
   }
 
   ngAfterViewInit(): void {
@@ -61,20 +60,25 @@ export class ClusterFinderComponent implements OnInit {
     this.progressService.turnOff();
   }
 
-  sortData(sort: any) {
-    this.progressService.turnOn();
+  sortChanged(sort: any) {
     this.filterService.setSearch(sort.active, sort.direction);
-    this.apiService.searchSeeds().subscribe((data: SeedModel[]) => {
-      this.seeds = data;
-      this.progressService.turnOff();
-    })
+    this.getData();
   }
 
-  filtersApplied() {
+  getData() {
     this.progressService.turnOn();
     this.apiService.searchSeeds().subscribe((data: SeedModel[]) => {
       this.seeds = data;
       this.progressService.turnOff();
-    })
+    },
+      _ => {
+        this.progressService.turnOff();
+        var ref = this.snackBar.open(
+          "Well that didn't work for some reason.", 
+          "Maybe retry?", 
+          { duration: 5000 }
+        );
+        ref.onAction().subscribe(() => this.getData());
+      })
   }
 }

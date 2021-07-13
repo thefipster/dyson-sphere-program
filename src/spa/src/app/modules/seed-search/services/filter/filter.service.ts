@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { EventEmitter, Injectable } from '@angular/core';
 import { FilterLimits } from '../../interfaces/filter-limits';
 import { SeedFilterModel } from '../../interfaces/seed-filter-model';
 import { SeedSearchModel } from '../../interfaces/seed-search-model';
@@ -10,15 +10,25 @@ export class FilterService {
   private filters: { [id: string] : FilterLimits; } = {};
   private column: string = "totalEnergy";
   private direction: string = "desc";
+  public onReset = new EventEmitter();
 
   constructor() { }
+
+  reset() {
+    this.filters = {};
+    this.onReset.emit();
+  }
 
   resetFilter(column: string) {
     delete this.filters[column];
   }
 
-  setFilter(column: string, value: number, highValue: number) {
-    this.filters[column] = { min: value, max: highValue };
+  setLimitedFilter(column: string, value: number, highValue: number) {
+    this.filters[column] = { min: value, max: highValue } as FilterLimits;
+  }
+
+  setValuedFilter(column: string, value: string) {
+    this.filters[column] = { value: value } as FilterLimits;
   }
 
   setSearch(column: string, direction: string) {

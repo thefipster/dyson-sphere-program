@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Options } from '@angular-slider/ngx-slider';
 import { FilterService } from '../../services/filter/filter.service';
+import { resetFakeAsyncZone } from '@angular/core/testing';
 
 @Component({
   selector: 'app-filter',
@@ -27,10 +28,12 @@ export class FilterComponent implements OnInit {
 
   constructor(
     private filterService: FilterService
-  ) { }
+  ) {
+    filterService.onReset.subscribe(() => this.reset());
+   }
 
   ngOnInit(): void {
-    this.setOptions(this.min, this.max, this.step);
+    this.reset();
   }
 
   setOptions(floor: number, ceil: number, step: number): void {
@@ -51,8 +54,14 @@ export class FilterComponent implements OnInit {
     if (this.highValue === this.max && this.value === this.min) {
       this.filterService.resetFilter(this.column);
     } else {
-      this.filterService.setFilter(this.column, this.value, this.highValue);
+      this.filterService.setLimitedFilter(this.column, this.value, this.highValue);
     }
   }
 
+  reset(): void {
+    this.setOptions(this.min, this.max, this.step);
+  }
 }
+
+
+

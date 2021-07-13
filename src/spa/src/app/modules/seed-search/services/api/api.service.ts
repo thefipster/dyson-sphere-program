@@ -2,7 +2,6 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { SeedModel } from '../../interfaces/seed-model';
-import { SeedSearchModel } from '../../interfaces/seed-search-model';
 import { FilterService } from '../filter/filter.service';
 
 @Injectable({
@@ -14,7 +13,7 @@ export class ApiService {
 
   constructor(
     private http: HttpClient,
-    private filterService: FilterService
+    private filterService: FilterService,
   ) { }
 
   public searchSeeds(): Observable<SeedModel[]> {

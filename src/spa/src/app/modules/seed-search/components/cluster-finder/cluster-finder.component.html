@@ -1,11 +1,11 @@
 <mat-sidenav-container>
     <mat-sidenav #sidenav class="sidenav-slider">
-        <app-sidebar (filtersApplied)="filtersApplied()"></app-sidebar>
+        <app-sidebar (filtersApplied)="getData()"></app-sidebar>
     </mat-sidenav>
 
     <mat-sidenav-content>
         <table mat-table matSort matSortDisableClear *ngIf="seeds.length > 0" class="seed-search-table"
-            [dataSource]="seeds" (matSortChange)="sortData($event)" matSortActive="totalEnergy" matSortDirection="desc">
+            [dataSource]="seeds" (matSortChange)="sortChanged($event)" matSortActive="totalEnergy" matSortDirection="desc">
 
             <ng-container matColumnDef="seed" [sticky]="true">
                 <th mat-header-cell *matHeaderCellDef mat-sort-header>
