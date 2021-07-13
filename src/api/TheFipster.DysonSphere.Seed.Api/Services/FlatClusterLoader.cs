@@ -57,7 +57,10 @@ namespace TheFipster.DysonSphere.Seed.Api.Services
             if (search.Filters.Any())
             {
                 var first = search.Filters.First();
-                query += $" WHERE \"{first.Column}\" BETWEEN {first.Min.ToString(CultureInfo.CreateSpecificCulture("en-US"))} AND {first.Max.ToString(CultureInfo.CreateSpecificCulture("en-US"))}";
+                if (!string.IsNullOrWhiteSpace(first.Value))
+                    query += $" WHERE \"{first.Column}\" = {first.Value}";
+                else
+                    query += $" WHERE \"{first.Column}\" BETWEEN {first.Min.ToString(CultureInfo.CreateSpecificCulture("en-US"))} AND {first.Max.ToString(CultureInfo.CreateSpecificCulture("en-US"))}";
 
                 if (search.Filters.Count() > 1)
                 {
@@ -66,7 +69,10 @@ namespace TheFipster.DysonSphere.Seed.Api.Services
                         if (!columns.Contains(filter.Column))
                             throw new Exception("Invalid filter column.");
 
-                        query += $" AND \"{filter.Column}\" BETWEEN {filter.Min.ToString(CultureInfo.CreateSpecificCulture("en-US"))} AND {filter.Max.ToString(CultureInfo.CreateSpecificCulture("en-US"))}";
+                        if (string.IsNullOrWhiteSpace(filter.Value))
+                            query += $" AND \"{filter.Column}\" = {filter.Value}";
+                        else
+                            query += $" AND \"{filter.Column}\" BETWEEN {filter.Min.ToString(CultureInfo.CreateSpecificCulture("en-US"))} AND {filter.Max.ToString(CultureInfo.CreateSpecificCulture("en-US"))}";
                     }
                 }
             }

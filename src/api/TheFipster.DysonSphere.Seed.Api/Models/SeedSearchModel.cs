@@ -11,6 +11,11 @@ namespace TheFipster.DysonSphere.Seed.Api.Models
 
         public string SortDirection { get; set; }
 
-        public SeedFilterModel[] Filters { get;  set; }
+        public SeedFilterModel[] Filters { get; set; }
+
+        public override int GetHashCode()
+            => SortColumn.GetHashCode() * 19
+             + SortDirection.GetHashCode() * 43
+             + Filters.GetHashCode();
     }
 }

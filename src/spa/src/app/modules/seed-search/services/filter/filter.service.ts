@@ -38,9 +38,9 @@ export class FilterService {
 
   getFilters(): SeedFilterModel[] {
     let filters = [];
-    for (let key in this.filters) {
-      let value = this.filters[key];
-      filters.push({ column: key, min: value.min, max: value.max } as SeedFilterModel);
+    for (let col in this.filters) {
+      let filter = this.filters[col];
+      filters.push({ column: col, min: filter.min, max: filter.max, value: filter.value } as SeedFilterModel);
     }
     return filters;
   }

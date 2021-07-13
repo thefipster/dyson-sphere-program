@@ -18,6 +18,8 @@ export class ApiService {
 
   public searchSeeds(): Observable<SeedModel[]> {
     const search = this.filterService.getSearch();
+    console.log("Search Query");
+    console.log(search);
     return this.http.post<SeedModel[]>(this.apiUrl, search);
   }
 }
